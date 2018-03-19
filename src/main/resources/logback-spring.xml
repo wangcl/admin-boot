@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{MM-dd HH:mm:ss} %-5level [%thread] %logger{50} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<root level="ERROR">
+		<appender-ref ref="CONSOLE"/>
+	</root>
+	<logger name="org.springframework.web" level="WARN"/>
+	<logger name="me.wangcl" level="DEBUG"></logger>
+</configuration>
