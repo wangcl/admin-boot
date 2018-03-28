@@ -1,4 +1,4 @@
-package me.wangcl.showcase.adminboot;
+package me.wangcl;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
