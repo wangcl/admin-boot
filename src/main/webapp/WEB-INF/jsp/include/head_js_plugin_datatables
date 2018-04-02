@@ -1,0 +1,5 @@
+	<script src="${ctx}/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="${ctx}/plugins/datatables/dataTables.bootstrap.min.js"></script>
+	<script src="${ctx}/plugins/datatables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+	<script src="${ctx}/plugins/datatables/extensions/Buttons/js/buttons.bootstrap.min.js"></script>
+	<script src="${ctx}/app/js/extend.datatables.js"></script>

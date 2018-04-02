@@ -1,0 +1,2 @@
+	<link rel="stylesheet" href="${ctx}/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${ctx}/plugins/ionicons/css/ionicons.min.css">

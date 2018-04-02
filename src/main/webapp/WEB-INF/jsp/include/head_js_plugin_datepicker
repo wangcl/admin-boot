@@ -1,0 +1,2 @@
+	<script src="${ctx}/plugins/datepicker/bootstrap-datepicker.js"></script>
+	<script src="${ctx}/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>

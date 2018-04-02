@@ -1,0 +1,2 @@
+	<script src="${ctx}/plugins/bootstrapselect/js/bootstrap-select.min.js"></script>
+	<script src="${ctx}/plugins/bootstrapselect/js/i18n/defaults-zh_CN.min.js"></script>

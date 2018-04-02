@@ -1,0 +1,5 @@
+	<link rel="shortcut icon" href="${ctx}/app/images/app_icon.ico" type="image/x-icon">
+
+	<link rel="stylesheet" href="${ctx}/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${ctx}/adminlte/css/AdminLTE.min.css">
+	<link rel="stylesheet" href="${ctx}/adminlte/css/skins/_all-skins.min.css">

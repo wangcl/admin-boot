@@ -1,0 +1,4 @@
+	<script src="${ctx}/plugins/jqueryvalidation/jquery.validate.min-1.17.0.js"></script>
+	<script src="${ctx}/plugins/jqueryvalidation/messages_zh.js"></script>
+	<script src="${ctx}/plugins/jqueryvalidation/additional-methods.js"></script>
+	<script src="${ctx}/plugins/jqueryvalidation/jquery-validate.bootstrap-tooltip.min.js"></script>

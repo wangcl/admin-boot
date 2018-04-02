@@ -1,0 +1,2 @@
+	<link rel="stylesheet" href="${ctx}/plugins/bootstrapselect/css/bootstrap-select.min.css">
+	<link rel="stylesheet" href="${ctx}/app/css/patch_bootstrapselect.css">
