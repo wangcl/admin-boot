@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.wangcl.sm.mapper.MenuItemMapper">
+	<insert id="insert" parameterType="me.wangcl.sm.entity.MenuItem">
+		INSERT INTO s_menu_item (
+			ID_,
+			PID_,
+			ICON_,
+			URL_,
+			NAME_
+		) VALUES (
+			#{id, jdbcType=VARCHAR},
+			#{pid, jdbcType=VARCHAR},
+			#{icon, jdbcType=VARCHAR},
+			#{url, jdbcType=VARCHAR},
+			#{name, jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="update" parameterType="me.wangcl.sm.entity.MenuItem">
+		UPDATE s_menu_item
+		<set>
+			<if test="pid!=null">PID_=#{pid},</if>
+			<if test="icon!=null">ICON_=#{icon},</if>
+			<if test="url!=null">URL_=#{url},</if>
+			<if test="name!=null">NAME_=#{name},</if>
+		</set>
+		WHERE
+			ID_=#{id}
+	</update>
+
+	<delete id="delete" parameterType="string">
+		DELETE FROM s_menu_item
+		WHERE
+			ID_=#{id}
+	</delete>
+
+	<sql id="sqlColumns">
+		ID_ id,
+		PID_ pid,
+		ICON_ icon,
+		URL_ url,
+		NAME_ name
+	</sql>
+
+	<select id="select" resultType="me.wangcl.sm.entity.MenuItem">
+		SELECT
+			<include refid="sqlColumns"/>
+		FROM s_menu_item
+		WHERE
+			ID_=#{id}
+	</select>
+
+	<select id="selectRoot" resultType="me.wangcl.sm.entity.MenuItem">
+		SELECT
+		<include refid="sqlColumns"/>
+		FROM s_menu_item
+		WHERE
+		PID_ IS NULL
+	</select>
+
+	<select id="selectList" resultType="me.wangcl.sm.entity.MenuItem">
+		SELECT
+			<include refid="sqlColumns"/>
+		FROM s_menu_item
+		WHERE
+			1=1
+			<!-- <if test="param!=null and param!=''">AND PARAM=#{param}</if>-->
+			<!-- <if test="param!=null and param!=''">AND PARAM LIKE #{param}||'%'</if>-->
+	</select>
+
+	<!--
+	<select id="selectSubListRecursively" resultType="me.wangcl.sm.entity.MenuItem" parameterType="string">
+		SELECT
+			<include refid="sqlColumns"/>
+		FROM s_menu_item
+		START WITH ID_=#{id}
+		CONNECT BY PRIOR ID_=PID_
+	</select>
+	-->
+	<select id="selectSubListRecursively" resultType="me.wangcl.sm.entity.MenuItem" parameterType="string">
+		SELECT
+			<include refid="sqlColumns"/>
+		FROM s_menu_item
+		WHERE find_in_set(ID_, getChildMenuItemIds(#{id}));
+	</select>
+
+</mapper>

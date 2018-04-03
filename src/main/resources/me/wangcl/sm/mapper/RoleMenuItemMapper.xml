@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.wangcl.sm.mapper.RoleMenuItemMapper">
+	<insert id="insert" parameterType="me.wangcl.sm.entity.RoleMenuItem">
+		<selectKey keyProperty="id" resultType="string" order="BEFORE">
+			SELECT replace(uuid(),'-','')
+		</selectKey>
+		INSERT INTO s_role_menu_item (
+			ID_,
+			ROLE_ID_,
+			MENU_ITEM_ID_
+		) VALUES (
+			#{id, jdbcType=VARCHAR},
+			#{roleId, jdbcType=VARCHAR},
+			#{menuItemId, jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="update" parameterType="me.wangcl.sm.entity.RoleMenuItem">
+		UPDATE s_role_menu_item
+		<set>
+			<if test="roleId!=null">ROLE_ID_=#{roleId},</if>
+			<if test="menuItemId!=null">MENU_ITEM_ID_=#{menuItemId},</if>
+		</set>
+		WHERE
+			ID_=#{id}
+	</update>
+
+	<delete id="delete" parameterType="string">
+		DELETE FROM s_role_menu_item
+		WHERE
+			ID_=#{id}
+	</delete>
+
+	<delete id="deleteByRole" parameterType="string">
+		DELETE FROM s_role_menu_item
+		WHERE
+			ROLE_ID_=#{roleId}
+	</delete>
+
+	<sql id="sqlColumns">
+		ID_ id,
+		ROLE_ID_ roleId,
+		MENU_ITEM_ID_ menuItemId
+	</sql>
+
+	<select id="select" resultType="me.wangcl.sm.entity.RoleMenuItem">
+		SELECT
+			<include refid="sqlColumns"/>
+		FROM s_role_menu_item
+		WHERE
+			ID_=#{id}
+	</select>
+
+	<select id="selectList" resultType="me.wangcl.sm.entity.RoleMenuItem">
+		SELECT
+			<include refid="sqlColumns"/>
+		FROM s_role_menu_item
+		WHERE
+			1=1
+			<!-- <if test="param!=null and param!=''">AND PARAM=#{param}</if>-->
+			<!-- <if test="param!=null and param!=''">AND PARAM LIKE #{param}||'%'</if>-->
+	</select>
+
+	<select id="selectCountByMenuItem" parameterType="string" resultType="int">
+		SELECT
+			count(*)
+		FROM s_role_menu_item
+		WHERE
+			MENU_ITEM_ID_=#{menuItemId}
+	</select>
+
+	<select id="selectCountByRole" parameterType="string" resultType="int">
+		SELECT
+			count(*)
+		FROM S_ROLE_MENU_ITEM
+		WHERE
+			ROLE_ID_=#{roleId}
+	</select>
+
+	<select id="selectMenuItemListByRole" parameterType="string" resultType="me.wangcl.sm.entity.MenuItem">
+		SELECT
+			mi.ID_ id,
+			mi.NAME_ name,
+			mi.PID_ pid,
+			mi.URL_ url,
+			mi.ICON_ icon
+		FROM s_role_menu_item rmi
+		LEFT JOIN s_menu_item mi ON rmi.MENU_ITEM_ID_=mi.ID_
+		WHERE rmi.ROLE_ID_=#{roleId};
+	</select>
+
+</mapper>
