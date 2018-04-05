@@ -7,6 +7,8 @@
 <html lang="zh-CN">
 <head>
 	<title>首页</title>
+	<%@ include file="/WEB-INF/jsp/include/head_css_plugin_sweetalert" %>
+	<%@ include file="/WEB-INF/jsp/include/head_js_plugin_sweetalert" %>
 </head>
 <body>
 
