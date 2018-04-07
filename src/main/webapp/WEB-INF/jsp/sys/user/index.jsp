@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
@@ -145,26 +144,26 @@
 							+ '<i class="fa fa-info"></i>&nbsp;查看</a>';
 
 						// 修改
-						<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('user_U', 'user_F')">
+						<%--<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('user_U', 'user_F')">--%>
 						operations += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 						operations += '<a href="#" onclick=edit(\'' + row.id + '\')>'
 							+ '<i class="fa fa-pencil"></i>&nbsp;修改</a>';
-						</se:authorize>
+						<%--</se:authorize>--%>
 
 						if ('admin' != data.account) { // 管理员用户不能删除、授权
 							// 删除
-							<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('user_D', 'user_F')">
+							<%--<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('user_D', 'user_F')">--%>
 							operations += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 							operations += '<a href="#" onclick=del(\'' + row.id + '\')>'
 								+ '<i class="fa fa-trash"></i>&nbsp;删除</a>';
-							</se:authorize>
+							<%--</se:authorize>--%>
 
 							// 角色授权
-							<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('user_F')">
+							<%--<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('user_F')">--%>
 							operations += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 							operations += '<a href="#" onclick=auth(\'' + row.account + '\')>'
 								+ '<i class="fa fa-trash"></i>&nbsp;授权</a>';
-							</se:authorize>
+							<%--</se:authorize>--%>
 						}
 
 						return operations;
@@ -180,7 +179,7 @@
 				{
 					extend: 'pageLength'
 				}
-				<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('user_C', 'user_F')">
+				<%--<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('user_C', 'user_F')">--%>
 				,
 				{
 					extend: 'btnCreate',
@@ -188,7 +187,7 @@
 					modelWidth: 550,
 					modelHeight: 550
 				}
-				</se:authorize>
+				<%--</se:authorize>--%>
 			]
 		});
 		table.buttons(0, null).container().appendTo('#data-table-buttons');
