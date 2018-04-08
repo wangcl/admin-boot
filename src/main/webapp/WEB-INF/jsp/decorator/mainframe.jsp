@@ -45,16 +45,14 @@
 						<ul class="dropdown-menu">
 							<!-- User image -->
 							<li class="user-header">
-								<%--<se:authentication property="principal" var="principal"/>--%>
+								<se:authentication property="principal" var="principal"/>
 								<%--<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">--%>
 								<p>
 									<strong>
-										<%--<se:authentication property="principal.username"/>（<se:authentication--%>
-											<%--property="principal.user.name"/>）--%>
-										admin
+										<se:authentication property="principal.username"/>（<se:authentication
+											property="principal.user.name"/>）
 									</strong>
 								</p>
-								<%--
 								<p>
 									<c:choose>
 										<c:when test="${empty principal.user.phone}">
@@ -79,7 +77,6 @@
 									<small>创建于 <se:authentication
 											property="principal.user.createTimeString"/></small>
 								</p>
-								--%>
 							</li>
 							<!-- Menu Body -->
 							<!--
