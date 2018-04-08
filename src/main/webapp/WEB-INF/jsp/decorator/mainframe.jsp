@@ -21,7 +21,7 @@
 			<span class="logo-mini"><img src="${ctx}/app/images/app_logo.png" width="32" height="32" alt="app"></span>
 			<!-- logo for regular state and mobile devices -->
 			<span class="logo-lg">
-				<img src="${ctx}/app/images/app_logo.png" width="32" height="32" alt="app">&nbsp;APP<b><small>app</small></b>
+				<img src="${ctx}/app/images/app_logo.png" width="32" height="32" alt="app">&nbsp;Admin<b><small>Boot</small></b>
 			</span>
 		</a>
 
