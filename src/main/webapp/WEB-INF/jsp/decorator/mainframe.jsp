@@ -37,9 +37,9 @@
 					<!-- User Account: style can be found in dropdown.less -->
 					<li class="dropdown user user-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<%--<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">--%>
 							<i class="fa fa-user">
-								<%--<span class="hidden-xs"><se:authentication property="principal.user.name"/></span>--%>
-								<span class="hidden-xs">admin</span>
+								<span class="hidden-xs"><se:authentication property="principal.user.name"/></span>
 							</i>
 						</a>
 						<ul class="dropdown-menu">
@@ -122,25 +122,25 @@
 						<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 					</a>
 					<ul class="treeview-menu">
-						<%--<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('user_R', 'user_F')">--%>
+						<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('user_R', 'user_F')">
 							<li id="item_user">
 								<a href="${ctx}/sys/user"><i class="fa fa-circle-o"></i> 用户管理</a>
 							</li>
-						<%--</se:authorize>--%>
-						<%--<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('res_R', 'res_F')">--%>
+						</se:authorize>
+						<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('res')">
 							<li id="item_res">
 								<a href="${ctx}/sys/res"><i class="fa fa-circle-o"></i> 资源管理</a>
 							</li>
-						<%--</se:authorize>--%>
-						<%--<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('role_R', 'role_F')">--%>
+						</se:authorize>
+						<se:authorize access="hasRole('ADMIN') or hasAnyAuthority('role')">
 							<li id="item_res">
 								<a href="${ctx}/sys/role"><i class="fa fa-circle-o"></i> 角色管理</a>
 							</li>
-						<%--</se:authorize>--%>
-						<%--<se:authorize access="not hasRole('ADMIN')--%>
-								<%--and not hasAnyAuthority('user_R', 'user_F', 'res_R', 'res_F', 'notification_R', 'notification_F', 'role_R', 'role_F')">--%>
-							<%--<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;没有可以访问的功能</li>--%>
-						<%--</se:authorize>--%>
+						</se:authorize>
+						<se:authorize access="not hasRole('ADMIN')
+								and not hasAnyAuthority('user', 'res', 'role')">
+							<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;没有可以访问的功能</li>
+						</se:authorize>
 					</ul>
 				</li>
 			</ul>
