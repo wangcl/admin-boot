@@ -162,6 +162,11 @@
 </div>
 <script>
 	function changePassword() {
+		var account = '<se:authentication property="principal.username"/>';
+		if (account) {
+			console.log("account: " + account);
+			openModal("${ctx}/profile/" + account + "/changePassword", 550, 450);
+		}
 	}
 
 	// 定位sidebar的菜单项
