@@ -157,7 +157,7 @@
 		<div class="pull-right hidden-xs">
 			<b>Version</b> 1.0.0
 		</div>
-		<strong>Copyright &copy; 2018 <a href="http://www.datang.com">Cattsoft </a>.</strong> All rights reserved.
+		<strong>Copyright &copy; 2018 <a href="http://wangcl.github.io">wangcl.me </a>.</strong> All rights reserved.
 	</footer>
 </div>
 <script>
