@@ -19,9 +19,9 @@ demonstrates how to integrate commonly used technologies.
 + **AdminLTE**: UI template
 
 ### dependencies
-+ spring boot 1.5.10, which contains spring 4.3.14
-+ mybatis 3.4.5
-+ mybatis-spring 1.3.1
++ spring boot 1.5.12, which contains spring 4.3.16
++ mybatis 3.4.6
++ mybatis-spring 1.3.2
 + sitemesh 3.0.1
 + bootstrap 3.3.7
 + AdminLTE 2.3.11

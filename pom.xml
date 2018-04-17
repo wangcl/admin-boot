@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.10.RELEASE</version>
+		<version>1.5.12.RELEASE</version>
 		<relativePath/>
 	</parent>
 
@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>1.3.1</version>
+			<version>1.3.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -54,7 +54,7 @@
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
-			<version>1.2.3</version>
+			<version>1.2.4</version>
 		</dependency>
 
 		<!-- JSP页面使用JSTL标签 -->
@@ -67,7 +67,7 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
-			<version>4.2.4.RELEASE</version>
+			<version>4.2.5.RELEASE</version>
 		</dependency>
 
 		<!-- SiteMesh Decorators -->
@@ -84,7 +84,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.45</version>
+			<version>5.1.46</version>
 			<scope>runtime</scope>
 		</dependency>
 
