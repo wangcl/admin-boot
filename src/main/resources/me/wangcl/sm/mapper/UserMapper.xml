@@ -74,8 +74,8 @@
 		FROM s_user
 		WHERE
 			1=1
-			<if test="account!=null and account!=''">AND ACCOUNT_ LIKE #{account}||'%'</if>
-			<if test="name!=null and name!=''">AND NAME_ LIKE #{name}||'%'</if>
+			<if test="account!=null and account!=''">AND ACCOUNT_ LIKE CONCAT(#{account}, '%')</if>
+			<if test="name!=null and name!=''">AND NAME_ LIKE CONCAT(#{name}, '%')</if>
 			<if test="fromDate!=null and fromDate!=''">AND CREATE_TIME_ &gt;= #{fromDate}</if>
 			<if test="toDate!=null and toDate!=''">AND CREATE_TIME_ &lt;= #{toDate}</if>
 	</select>
