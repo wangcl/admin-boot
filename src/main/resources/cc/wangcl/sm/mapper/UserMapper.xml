@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.wangcl.sm.mapper.UserMapper">
+	<insert id="insert" parameterType="cc.wangcl.sm.entity.User">
+		<selectKey keyProperty="id" resultType="string" order="BEFORE">
+			SELECT replace(uuid(),'-','')
+		</selectKey>
+		INSERT INTO s_user (
+			ID_,
+			ACCOUNT_,
+			NAME_,
+			PASSWORD_,
+			EMAIL_,
+			PHONE_,
+			CREATE_TIME_
+		) VALUES (
+			#{id, jdbcType=VARCHAR},
+			#{account, jdbcType=VARCHAR},
+			#{name, jdbcType=VARCHAR},
+			#{password, jdbcType=VARCHAR},
+			#{email, jdbcType=VARCHAR},
+			#{phone, jdbcType=VARCHAR},
+			#{createTime, jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+	<update id="update" parameterType="cc.wangcl.sm.entity.User">
+		UPDATE s_user
+		<set>
+			<if test="name!=null">NAME_=#{name},</if>
+			<if test="password!=null">PASSWORD_=#{password},</if>
+			<if test="email!=null">EMAIL_=#{email},</if>
+			<if test="phone!=null">PHONE_=#{phone},</if>
+		</set>
+		WHERE
+		ID_=#{id}
+	</update>
+
+	<delete id="delete" parameterType="string">
+		DELETE FROM s_user
+		WHERE
+			ID_=#{id}
+	</delete>
+
+	<sql id="sqlColumns">
+		ID_ id,
+		ACCOUNT_ account,
+		NAME_ name,
+		PASSWORD_ password,
+		EMAIL_ email,
+		PHONE_ phone,
+		CREATE_TIME_ createTime
+	</sql>
+
+	<select id="select" resultType="cc.wangcl.sm.entity.User">
+		SELECT
+			<include refid="sqlColumns"/>
+		FROM s_user
+		WHERE
+			ID_=#{id}
+	</select>
+
+	<select id="selectByAccount" resultType="cc.wangcl.sm.entity.User">
+		SELECT
+			<include refid="sqlColumns"/>
+		FROM s_user
+		WHERE
+			ACCOUNT_=#{account}
+	</select>
+
+	<select id="selectListPaging" resultType="cc.wangcl.sm.entity.User">
+		SELECT
+			<include refid="sqlColumns"/>
+		FROM s_user
+		WHERE
+			1=1
+			<if test="account!=null and account!=''">AND ACCOUNT_ LIKE CONCAT(#{account}, '%')</if>
+			<if test="name!=null and name!=''">AND NAME_ LIKE CONCAT(#{name}, '%')</if>
+			<if test="fromDate!=null and fromDate!=''">AND CREATE_TIME_ &gt;= #{fromDate}</if>
+			<if test="toDate!=null and toDate!=''">AND CREATE_TIME_ &lt;= #{toDate}</if>
+	</select>
+
+	<select id="selectUserWithRolesByAccount" resultMap="userMap">
+		SELECT
+			u.ID_ userId,
+			u.ACCOUNT_ account,
+			u.NAME_ userName,
+			u.PASSWORD_ password,
+			u.EMAIL_ email,
+			u.PHONE_ phone,
+			u.CREATE_TIME_ createTime,
+			r.ID_ roleId,
+			r.CODE_ code,
+			r.NAME_ roleName
+		FROM
+			s_user u LEFT JOIN s_user_role ur ON u.ID_=ur.USER_ID_ LEFT JOIN s_role r ON ur.ROLE_ID_=r.ID_
+		WHERE
+			u.ACCOUNT_=#{account}
+	</select>
+	<resultMap id="userMap" type="cc.wangcl.sm.entity.User">
+		<id property="id" column="userId"/>
+		<result property="account" column="account"/>
+		<result property="name" column="userName"/>
+		<result property="password" column="password"/>
+		<result property="email" column="email"/>
+		<result property="phone" column="phone"/>
+		<result property="createTime" column="createTime"/>
+		<collection property="roleList" javaType="ArrayList" ofType="cc.wangcl.sm.entity.Role">
+			<id property="id" column="roleId"/>
+			<result property="code" column="code"/>
+			<result property="name" column="roleName"/>
+		</collection>
+	</resultMap>
+
+</mapper>

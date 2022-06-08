@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.wangcl.sm.mapper.RoleMapper">
+	<insert id="insert" parameterType="cc.wangcl.sm.entity.Role">
+		<selectKey keyProperty="id" resultType="string" order="BEFORE">
+			SELECT replace(uuid(),'-','')
+		</selectKey>
+		INSERT INTO s_role (
+			ID_,
+			CODE_,
+			NAME_
+		) VALUES (
+			#{id, jdbcType=VARCHAR},
+			#{code, jdbcType=VARCHAR},
+			#{name, jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="update" parameterType="cc.wangcl.sm.entity.Role">
+		UPDATE s_role
+		<set>
+			<if test="code!=null">CODE_=#{code},</if>
+			<if test="name!=null">NAME_=#{name},</if>
+		</set>
+		WHERE
+			ID_=#{id}
+	</update>
+
+	<delete id="delete" parameterType="string">
+		DELETE FROM s_role
+		WHERE
+			ID_=#{id}
+	</delete>
+
+	<sql id="sqlColumns">
+		ID_ id,
+		CODE_ code,
+		NAME_ name
+	</sql>
+
+	<select id="select" resultType="cc.wangcl.sm.entity.Role">
+		SELECT
+			<include refid="sqlColumns"/>
+		FROM s_role
+		WHERE
+			ID_=#{id}
+	</select>
+
+	<select id="selectByCode" resultType="cc.wangcl.sm.entity.Role">
+		SELECT
+			<include refid="sqlColumns"/>
+		FROM s_role
+		WHERE
+			CODE_=#{code}
+	</select>
+
+	<select id="selectList" resultType="cc.wangcl.sm.entity.Role">
+		SELECT
+			<include refid="sqlColumns"/>
+		FROM s_role
+		WHERE
+			1=1
+			<if test="name!=null and name!=''">AND NAME_ LIKE CONCAT('%', #{name}, '%')</if>
+	</select>
+
+	<select id="selectRoleWithMenuItemsByCode" resultMap="rmiMap" parameterType="string">
+		SELECT
+			r.ID_ roleId,
+			r.CODE_ roleCode,
+			r.NAME_ roleName,
+			mi.ID_ menuItemId,
+			mi.PID_ pid,
+			mi.NAME_ menuItemName,
+			mi.ICON_ icon,
+			mi.URL_ url
+		FROM
+			s_role r
+			LEFT JOIN s_role_menu_item ri ON r.ID_=ri.ROLE_ID_
+			LEFT JOIN s_menu_item mi ON ri.MENU_ITEM_ID_=mi.ID_
+		WHERE
+			r.CODE_=#{roleCode}
+	</select>
+	<resultMap id="rmiMap" type="cc.wangcl.sm.entity.Role">
+		<id property="id" column="roleId"/>
+		<result property="code" column="roleCode"/>
+		<result property="name" column="roleName"/>
+		<collection property="menuItemList" javaType="ArrayList" ofType="cc.wangcl.sm.entity.MenuItem">
+			<id property="id" column="menuItemId"/>
+			<result property="pid" column="pid"/>
+			<result property="name" column="menuItemName"/>
+			<result property="icon" column="icon"/>
+			<result property="url" column="url"/>
+		</collection>
+	</resultMap>
+
+	<select id="selectMenuItemsByRole" parameterType="string" resultType="cc.wangcl.sm.entity.MenuItem">
+		SELECT
+			mi.ID_ menuItemId,
+			mi.PID_ pid,
+			mi.NAME_ menuItemName,
+			mi.ICON_ icon,
+			mi.URL_ url
+		FROM
+			s_menu_item mi
+			LEFT JOIN s_role_menu_item rmi ON mi.ID_=rmi.MENU_ITEM_ID_
+			LEFT JOIN s_role r ON rmi.ROLE_ID_=r.ID_
+		WHERE
+			rm.ROLE_ID_=#{roleId}
+	</select>
+</mapper>
